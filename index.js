@@ -32,6 +32,10 @@ function isUnixTimestampString(value) {
   }
   return false;
 }
+function isDateValid(date) {
+  // The 'isValid' method was introduced in ECMAScript 6 (ES6)
+  return !isNaN(date) && !isNaN(date.getTime());
+}
 
 // your first API endpoint... 
 app.get("/api/:value", function (req, res) {
@@ -45,13 +49,18 @@ final_date = new Date();
   else {
     final_date = new Date(req.params.value);
   }
-   
+
+  if (isDateValid(final_date)) {
   let unix_timestamp = final_date.getTime();
 let date = final_date.toUTCString();
 
 
   res.json({ "unix":unix_timestamp, "utc":date});
-  
+}
+
+  else {
+    res.json({ error : "Invalid Date" });
+  }
 });
 
 app.get("/api/", function (req, res) {
