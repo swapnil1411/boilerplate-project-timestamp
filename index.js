@@ -36,7 +36,10 @@ function isUnixTimestampString(value) {
 // your first API endpoint... 
 app.get("/api/:value", function (req, res) {
   let final_date;
-  if (isUnixTimestampString(req.params.value)) {
+  if (req.params.value.length ===0){
+let final_date = new Date();
+  }
+  else if (isUnixTimestampString(req.params.value)) {
      final_date = new Date(parseInt(req.params.value));
   }
   else {
