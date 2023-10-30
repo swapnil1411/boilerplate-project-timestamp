@@ -36,8 +36,8 @@ function isUnixTimestampString(value) {
 // your first API endpoint... 
 app.get("/api/:value", function (req, res) {
   let final_date;
-  if (req.params.value.length ===0){
-let final_date = new Date();
+  if (req.params.value.length == 0){
+final_date = new Date();
   }
   else if (isUnixTimestampString(req.params.value)) {
      final_date = new Date(parseInt(req.params.value));
@@ -53,6 +53,22 @@ let date = final_date.toUTCString();
   res.json({ "unix":unix_timestamp, "utc":date});
   
 });
+
+app.get("/api/", function (req, res) {
+  let final_date;
+final_date = new Date();
+  
+   
+  let unix_timestamp = final_date.getTime();
+let date = final_date.toUTCString();
+
+
+  res.json({ "unix":unix_timestamp, "utc":date});
+  
+});
+
+
+
 
 
 
